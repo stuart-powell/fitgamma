@@ -1,12 +1,12 @@
 {
-  "name": "heroku-plumber-app",
+  "name": "fitgamma",
   "stack": "heroku-18",
-  "description": "This is an example Plumber application, which uses heroku-buildpack-r for Heroku.",
+  "description": "This is Plumber application, to fit a gamma distribution to an array of data.",
   "keywords": [
     "r",
     "plumber"
   ],
-  "repository": "https://github.com/virtualstaticvoid/heroku-plumber-app",
+  "repository": "https://github.com/stuart-powell/fitgamma.git",
   "logo": "https://github.com/virtualstaticvoid/heroku-plumber-app/raw/master/logo.png",
   "success_url": "/",
   "formation": {

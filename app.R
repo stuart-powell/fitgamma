@@ -1,4 +1,5 @@
 library(plumber)
+library(fitdistrplus)
 
 port <- Sys.getenv('PORT')
 

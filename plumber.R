@@ -17,17 +17,22 @@ function(msg=""){
 }
 
 #* Plot a histogram
-#* @png
+#* @serializer png
 #* @get /plot
 function(){
   rand <- rnorm(100)
   hist(rand)
 }
 
-#* Return the sum of two numbers
-#* @param a The first number to add
-#* @param b The second number to add
-#* @post /sum
-function(a, b){
-  as.numeric(a) + as.numeric(b)
+#* Return the gamma distribution parameters for a set of data
+#* @param data a first object
+#* @post /fit
+function(data){
+  vd_gamma <- fitdist(data, "gamma",lower=c(0,0))
+  
+  result <- list(
+    "gmean" = vd_gamma$estimate[["shape"]]/vd_gamma$estimate[["rate"]],
+    "gof" = gofstat(vd_gamma)$ks[["1-mle-gamma"]]
+  )
+  return(result)
 }

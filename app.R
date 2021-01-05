@@ -1,5 +1,8 @@
 library(plumber)
 library(fitdistrplus)
+library(ggplot2)
+library(modelr)
+library(dplyr)
 
 port <- Sys.getenv('PORT')
 

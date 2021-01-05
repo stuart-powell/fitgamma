@@ -1,1 +1,1 @@
-helpers.installPackages("dplyr", "fitdistrplus")
+helpers.installPackages("dplyr", "fitdistrplus","ggplot2", "modelr")

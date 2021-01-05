@@ -16,12 +16,21 @@ function(msg=""){
   list(msg = paste0("The message is: '", msg, "'"))
 }
 
-#* Plot a histogram
+#* Plot the line of best fit for data
 #* @serializer png
-#* @get /plot
-function(){
-  rand <- rnorm(100)
-  hist(rand)
+#* @post /plot
+function(ind_results){
+  
+  mod1 <- lm(time ~ nitch, ind_results)
+  
+  ind_results_pred <- ind_results %>% 
+    add_predictions(mod1)
+  
+  x <- ggplot(ind_results_pred,aes(nitch,time)) + 
+    geom_point(aes(y = time)) +
+    geom_line(aes(y = pred), color = "red")
+  
+  print(x)
 }
 
 #* Return the gamma distribution parameters for a set of data

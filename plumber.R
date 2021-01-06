@@ -21,7 +21,7 @@ function(msg=""){
 #* @post /plot
 function(ind_results){
   
-  mod1 <- lm(time ~ nitch, ind_results)
+  mod1 <- lm(ind_nitch ~ nitch, ind_results)
   
   ind_results_pred <- ind_results %>% 
     add_predictions(mod1)

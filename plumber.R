@@ -27,7 +27,7 @@ function(ind_results){
     add_predictions(mod1)
   
   x <- ggplot(ind_results_pred,aes(nitch,time)) + 
-    geom_point(aes(y = time)) +
+    geom_point(aes(y = ind_nitch)) +
     geom_line(aes(y = pred), color = "red")
   
   print(x)

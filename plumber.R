@@ -34,7 +34,7 @@ function(ind_results){
 }
 
 #* Return the gamma distribution parameters for a set of data
-#* @param data a first object
+#* @param data an array of numbers to fit
 #* @post /fit
 function(data){
   vd_gamma <- fitdist(data, "gamma",lower=c(0,0))
@@ -42,6 +42,28 @@ function(data){
   result <- list(
     "gmean" = vd_gamma$estimate[["shape"]]/vd_gamma$estimate[["rate"]],
     "gof" = gofstat(vd_gamma)$ks[["1-mle-gamma"]]
+  )
+  return(result)
+}
+
+#* Return the gamma mean and SNITCH alignment for a set of solving results
+#* @param data a data frame of times and crossword nitches
+#* @post /align
+function(data){
+  vd_gamma <- fitdist(data$time, "gamma",lower=c(0,0))
+  gmean <- vd_gamma$estimate[["shape"]]/vd_gamma$estimate[["rate"]]
+  
+  ind_results <- data %>% 
+    mutate(ind_nitch = time/gmean*100)
+  
+  mod1 <- lm(ind_nitch ~ nitch, ind_results)
+
+  # find the slope
+  slope <- summary(mod1)["coefficients"][[1]][[2]]
+  
+  result <- list(
+    "gmean" = gmean,
+    "slope" = slope
   )
   return(result)
 }
